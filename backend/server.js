@@ -14,7 +14,7 @@ app.use(express.json());
 
 connectDB();
 
-app.use("/api/company/auth", companyAuthRoutes);
+app.use("/api/company/", companyAuthRoutes);
 
 app.get("/", (req, res) => {
   res.json({
