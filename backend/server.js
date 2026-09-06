@@ -2,6 +2,7 @@ const express=require("express");
 const cors=require("cors");
 require("dotenv").config();
 const userRoutes = require("./routes/userRoute");
+const candidateRoutes = require("./routes/candidateRoutes");
 
 
 const connectDB=require("./db/db.js");
@@ -22,6 +23,8 @@ app.get("/", (req, res) => {
   });
 });
 app.use("/api/users", userRoutes);
+app.use("/api/users", userRoutes);
+app.use("/api/candidates", candidateRoutes);
 
 const PORT = process.env.PORT || 5000;
 
