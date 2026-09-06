@@ -11,19 +11,19 @@ const authMiddleware = require("../middleware/auth");
 const router = express.Router();
 
 router.post(
-  "/profile",
+  "/",
   authMiddleware,
   createCandidateProfile
 );
 
 router.get(
-  "/profile",
+  "/",
   authMiddleware,
   getCandidateProfile
 );
 
 router.put(
-  "/profile",
+  "/",
   authMiddleware,
   updateCandidateProfile
 );
