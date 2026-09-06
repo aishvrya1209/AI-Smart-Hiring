@@ -22,8 +22,9 @@ app.get("/", (req, res) => {
     message: "AI Smart Hiring Backend is running"
   });
 });
+
 app.use("/api/users", userRoutes);
-app.use("/api/users", userRoutes);
+
 app.use("/api/candidates", candidateRoutes);
 
 const PORT = process.env.PORT || 5000;
