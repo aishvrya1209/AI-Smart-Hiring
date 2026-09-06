@@ -3,7 +3,7 @@ const Candidate = require("../models/candidateprofile");
 // Create candidate profile
 const createCandidateProfile = async (req, res) => {
   try {
-    const userId = req.user.userId;
+    const userId = req.user.id;
 
     // Check if profile already exists
     const existingProfile = await Candidate.findOne({ userId });
@@ -36,7 +36,7 @@ const createCandidateProfile = async (req, res) => {
 // Get candidate profile
 const getCandidateProfile = async (req, res) => {
   try {
-    const userId = req.user.userId;
+    const userId = req.user.id;
 
     const candidate = await Candidate.findOne({ userId })
       .populate("userId", "name email");
@@ -63,7 +63,7 @@ const getCandidateProfile = async (req, res) => {
 // Update candidate profile
 const updateCandidateProfile = async (req, res) => {
   try {
-    const userId = req.user.userId;
+    const userId = req.user.id;
 
     const candidate = await Candidate.findOneAndUpdate(
       { userId },
