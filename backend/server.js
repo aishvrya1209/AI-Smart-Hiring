@@ -4,11 +4,14 @@ require("dotenv").config();
 
 const userRoutes = require("./routes/userRoute");
 const candidateRoutes = require("./routes/candidateRoutes");
+const adminAuthRoutes = require("./routes/adminAuthRoutes");
+const adminRoutes = require("./routes/adminRoutes");
+const companyAuthRoutes = require("./routes/companyAuthRoutes");
+const companyProfileRoutes = require("./routes/companyProfileRoutes");
 
 const connectDB = require("./db/db.js");
 
-const companyAuthRoutes = require("./routes/companyAuthRoutes");
-const companyProfileRoutes = require("./routes/companyProfileRoutes");
+
 
 const app = express();
 
@@ -24,6 +27,10 @@ app.use("/api/company/profile", companyProfileRoutes);
 app.use("/api/users", userRoutes);
 
 app.use("/api/users/profile", candidateRoutes);
+
+app.use("/api/admin/auth", adminAuthRoutes);
+
+app.use("/api/admin", adminRoutes);
 
 app.get("/", (req, res) => {
     res.json({

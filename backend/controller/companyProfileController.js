@@ -63,7 +63,8 @@ const createCompanyProfile = async (req, res) => {
         founder: company.founder,
         foundingYear: company.foundingYear,
         description: company.description,
-        verificationStatus: company.verificationStatus
+        verificationStatus: company.verificationStatus,
+        profileStatus:company.profileCompleted
       }
     });
   } catch (error) {
