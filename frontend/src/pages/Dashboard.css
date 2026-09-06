@@ -1,0 +1,57 @@
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500&family=Public+Sans:wght@400;500;600&display=swap");
+
+.dashboard-shell {
+  min-height: 100vh;
+  background: #f2efe6;
+  color: #14181c;
+  font-family: "Public Sans", sans-serif;
+}
+
+.dashboard-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 2.5rem;
+  border-bottom: 1px solid #d8d3c6;
+}
+
+.dashboard-mark {
+  font-family: "Fraunces", serif;
+  font-size: 1.05rem;
+}
+
+.dashboard-logout {
+  background: none;
+  border: 1px solid #d8d3c6;
+  padding: 0.5rem 0.9rem;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.dashboard-logout:hover {
+  border-color: #14181c;
+}
+
+.dashboard-body {
+  padding: 4rem 2.5rem;
+  max-width: 40ch;
+}
+
+.dashboard-eyebrow {
+  font-size: 0.85rem;
+  opacity: 0.6;
+  margin: 0 0 0.75rem;
+}
+
+.dashboard-headline {
+  font-family: "Fraunces", serif;
+  font-weight: 500;
+  font-size: 2rem;
+  margin: 0 0 0.75rem;
+}
+
+.dashboard-note {
+  font-size: 0.95rem;
+  opacity: 0.75;
+  line-height: 1.6;
+}
