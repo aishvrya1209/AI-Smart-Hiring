@@ -48,7 +48,7 @@ const companySchema = new mongoose.Schema(
     },
 
     foundingYear: {
-      type: Number
+      type: Number,
     },
 
     description: {
