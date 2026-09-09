@@ -8,6 +8,8 @@ import MyDrivesPage from "./pages/MyDrivesPage.jsx";
 import DriveFormPage from "./pages/DriveFormPage.jsx";
 import BrowseDrivesPage from "./pages/BrowseDrivesPage.jsx";
 import DriveDetailPage from "./pages/DriveDetailPage.jsx";
+import AdminLoginPage from "./pages/AdminLoginPage.jsx";
+import AdminDashboardPage from "./pages/AdminDashboardPage.jsx";
 
 export default function App() {
   return (
@@ -22,6 +24,8 @@ export default function App() {
       <Route path="/company/drives/:id/edit" element={<DriveFormPage />} />
       <Route path="/drives" element={<BrowseDrivesPage />} />
       <Route path="/drives/:id" element={<DriveDetailPage />} />
+      <Route path="/admin/login" element={<AdminLoginPage />} />
+      <Route path="/admin/dashboard" element={<AdminDashboardPage />} />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
