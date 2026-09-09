@@ -9,6 +9,7 @@ const adminRoutes = require("./routes/adminRoutes");
 const companyAuthRoutes = require("./routes/companyAuthRoutes");
 const companyProfileRoutes = require("./routes/companyProfileRoutes");
 const placementDriveRoutes = require("./routes/placementDriveRoutes.js")
+const applicationRoutes = require("./routes/applicationRoutes");
 
 const connectDB = require("./db/db.js");
 
@@ -34,6 +35,8 @@ app.use("/api/admin/auth", adminAuthRoutes);
 app.use("/api/admin", adminRoutes);
 
 app.use("/api/company/drives" , placementDriveRoutes);
+
+app.use("/api/applications", applicationRoutes);
 
 app.get("/", (req, res) => {
     res.json({

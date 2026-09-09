@@ -1,4 +1,4 @@
-const Candidate = require("../models/candidateprofile");
+const Candidate = require("../models/CandidateProfile");
 
 // Create candidate profile
 const createCandidateProfile = async (req, res) => {
