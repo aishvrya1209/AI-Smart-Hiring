@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate, useNavigate, Link } from "react-router-dom";
 import "./Dashboard.css";
 
 export default function Dashboard() {
@@ -37,19 +37,73 @@ export default function Dashboard() {
     <div className="dashboard-shell">
       <header className="dashboard-header">
         <span className="dashboard-mark">AI Smart Hiring</span>
-        <button type="button" className="dashboard-logout" onClick={handleLogout}>
-          Log out
-        </button>
+        <div className="dashboard-header-right">
+          <span className="dashboard-role-badge">
+            {session.role === "company" ? "Company" : "Candidate"}
+          </span>
+          <button type="button" className="dashboard-logout" onClick={handleLogout}>
+            Log out
+          </button>
+        </div>
       </header>
 
       <main className="dashboard-body">
-        <p className="dashboard-eyebrow">
-          {session.role === "company" ? "Company account" : "Candidate account"}
-        </p>
-        <h1 className="dashboard-headline">Welcome, {name}.</h1>
-        <p className="dashboard-note">
-          This is a placeholder — build out the real dashboard here.
-        </p>
+        <div className="dashboard-content-box">
+          <section className="dashboard-hero">
+            <p className="dashboard-eyebrow">
+              {session.role === "company" ? "Company account" : "Candidate account"}
+            </p>
+            <h1 className="dashboard-headline">Welcome, {name}.</h1>
+            <p className="dashboard-note">
+              {session.role === "company"
+                ? "Manage your company profile and placement drives from here."
+                : "Your journey to a great role starts here."}
+            </p>
+          </section>
+
+          <section className="dashboard-grid">
+            {session.role === "company" && (
+              <Link to="/company/profile" className="dashboard-card">
+                <span className="dashboard-card-eyebrow">Company</span>
+                <h2 className="dashboard-card-title">Company profile</h2>
+                <p className="dashboard-card-note">
+                  View and edit your company details, verification status, and about section.
+                </p>
+                <span className="dashboard-card-cta">Open →</span>
+              </Link>
+            )}
+
+            {session.role === "company" ? (
+              <Link to="/company/drives" className="dashboard-card">
+                <span className="dashboard-card-eyebrow">Company</span>
+                <h2 className="dashboard-card-title">Placement drives</h2>
+                <p className="dashboard-card-note">
+                  Create and manage your hiring drives.
+                </p>
+                <span className="dashboard-card-cta">Open →</span>
+              </Link>
+            ) : (
+              <>
+                <Link to="/candidate/profile" className="dashboard-card">
+                  <span className="dashboard-card-eyebrow">Candidate</span>
+                  <h2 className="dashboard-card-title">My profile</h2>
+                  <p className="dashboard-card-note">
+                    Add your education, skills, and projects.
+                  </p>
+                  <span className="dashboard-card-cta">Open →</span>
+                </Link>
+                <Link to="/drives" className="dashboard-card">
+                  <span className="dashboard-card-eyebrow">Candidate</span>
+                  <h2 className="dashboard-card-title">Browse drives</h2>
+                  <p className="dashboard-card-note">
+                    Explore open drives and apply.
+                  </p>
+                  <span className="dashboard-card-cta">Open →</span>
+                </Link>
+              </>
+            )}
+          </section>
+        </div>
       </main>
     </div>
   );

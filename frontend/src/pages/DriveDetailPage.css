@@ -1,0 +1,158 @@
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Public+Sans:wght@400;500;600&display=swap");
+
+.drivedetail-shell {
+  min-height: 100vh;
+  background: #f2efe6;
+  color: #14181c;
+  font-family: "Public Sans", sans-serif;
+}
+
+.drivedetail-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 2.5rem;
+  border-bottom: 1px solid #d8d3c6;
+}
+
+.drivedetail-mark {
+  font-family: "Fraunces", serif;
+  font-size: 1.05rem;
+  color: #14181c;
+  text-decoration: none;
+}
+
+.drivedetail-back {
+  color: #8a6d3b;
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border: 1px solid #8a6d3b;
+  border-radius: 6px;
+  padding: 0.5rem 0.9rem;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.drivedetail-back:hover {
+  background: #8a6d3b;
+  color: #fff;
+}
+
+.drivedetail-body {
+  padding: 3rem 2.5rem 5rem;
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.drivedetail-loading,
+.drivedetail-error {
+  opacity: 0.6;
+}
+
+.drivedetail-error {
+  color: #b3432e;
+}
+
+.drivedetail-card {
+  background: #fffdf8;
+  border: 1px solid #d8d3c6;
+  border-radius: 14px;
+  box-shadow: 0 8px 24px rgba(20, 24, 28, 0.06);
+  padding: 2.25rem 2.5rem;
+}
+
+.drivedetail-top {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.drivedetail-status {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: capitalize;
+  padding: 0.3rem 0.65rem;
+  border-radius: 999px;
+}
+
+.drivedetail-status--live {
+  background: rgba(58, 122, 74, 0.12);
+  color: #3a7a4a;
+}
+
+.drivedetail-status--draft {
+  background: rgba(20, 24, 28, 0.08);
+  color: rgba(20, 24, 28, 0.6);
+}
+
+.drivedetail-status--closed {
+  background: rgba(179, 67, 46, 0.1);
+  color: #b3432e;
+}
+
+.drivedetail-type {
+  font-size: 0.8rem;
+  opacity: 0.55;
+}
+
+.drivedetail-title {
+  font-family: "Fraunces", serif;
+  font-weight: 500;
+  font-size: clamp(1.7rem, 3vw, 2.2rem);
+  margin: 0 0 0.5rem;
+}
+
+.drivedetail-meta {
+  font-size: 0.9rem;
+  opacity: 0.65;
+  margin: 0 0 1.5rem;
+}
+
+.drivedetail-desc {
+  font-size: 0.98rem;
+  line-height: 1.65;
+  margin: 0 0 1.75rem;
+}
+
+.drivedetail-section {
+  border-top: 1px solid #d8d3c6;
+  padding-top: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+.drivedetail-section h2 {
+  font-family: "Fraunces", serif;
+  font-weight: 500;
+  font-size: 1.05rem;
+  margin: 0 0 0.5rem;
+}
+
+.drivedetail-section p {
+  font-size: 0.92rem;
+  line-height: 1.6;
+  opacity: 0.85;
+  margin: 0;
+}
+
+.drivedetail-dates {
+  display: flex;
+  gap: 2rem;
+  border-top: 1px solid #d8d3c6;
+  padding-top: 1.25rem;
+}
+
+.drivedetail-dates div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.drivedetail-dates span {
+  font-size: 0.78rem;
+  opacity: 0.55;
+}
+
+.drivedetail-dates strong {
+  font-size: 0.95rem;
+}

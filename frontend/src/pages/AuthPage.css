@@ -17,6 +17,8 @@
   background: var(--paper);
 }
 
+/* ---------- Left narrative panel (unchanged) ---------- */
+
 .auth-narrative {
   background: var(--ink);
   color: var(--paper);
@@ -54,7 +56,6 @@
 .auth-eyebrow {
   font-size: 0.85rem;
   margin: 0 0 0.9rem;
-  color: var(--steel-live, currentColor);
   opacity: 0.75;
 }
 
@@ -88,21 +89,47 @@
   line-height: 1;
 }
 
+/* ---------- Right form panel (redesigned) ---------- */
+
 .auth-panel {
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 2rem;
+  background: repeating-linear-gradient(
+      135deg,
+      rgba(20, 24, 28, 0.015) 0px,
+      rgba(20, 24, 28, 0.015) 1px,
+      transparent 1px,
+      transparent 14px
+    ),
+    var(--paper);
 }
 
 .auth-panel-inner {
   width: 100%;
-  max-width: 360px;
+  max-width: 380px;
+  background: #fffdf8;
+  border: 1px solid var(--rule);
+  border-radius: 16px;
+  box-shadow: 0 16px 40px rgba(20, 24, 28, 0.08);
+  padding: 2.5rem 2.25rem;
+}
+
+.auth-shell--student .auth-panel-inner {
+  --accent: var(--steel);
+}
+
+.auth-shell--company .auth-panel-inner {
+  --accent: var(--bronze);
 }
 
 .auth-tabs {
   display: flex;
-  border-bottom: 1px solid var(--rule);
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  padding: 0.25rem;
   margin-bottom: 2rem;
 }
 
@@ -110,65 +137,75 @@
   flex: 1;
   background: none;
   border: none;
-  padding: 0.75rem 0;
+  border-radius: 7px;
+  padding: 0.6rem 0;
   font-family: "Public Sans", sans-serif;
-  font-size: 0.95rem;
-  color: rgba(20, 24, 28, 0.5);
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: rgba(20, 24, 28, 0.55);
   cursor: pointer;
-  border-bottom: 2px solid transparent;
-  margin-bottom: -1px;
-  transition: color 0.15s ease, border-color 0.15s ease;
+  transition: color 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
 }
 
 .auth-tab.is-active {
-  color: var(--ink);
-  border-bottom-color: var(--ink);
+  color: #fff;
+  background: var(--accent, var(--ink));
+  box-shadow: 0 4px 10px rgba(20, 24, 28, 0.15);
 }
 
 .auth-form {
   display: flex;
   flex-direction: column;
-  gap: 1.1rem;
+  gap: 1.2rem;
 }
 
 .auth-field {
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: rgba(20, 24, 28, 0.7);
 }
 
 .auth-field input {
   font-family: "Public Sans", sans-serif;
   font-size: 1rem;
-  padding: 0.65rem 0.7rem;
+  padding: 0.75rem 0.85rem;
   border: 1px solid var(--rule);
+  border-radius: 8px;
   background: #fff;
   color: var(--ink);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
 
 .auth-field input:focus-visible {
-  outline: 2px solid var(--ink);
-  outline-offset: 1px;
+  outline: none;
+  border-color: var(--accent, var(--ink));
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent, var(--ink)) 18%, transparent);
 }
 
 .auth-error {
   font-size: 0.85rem;
   color: #b3432e;
+  background: rgba(179, 67, 46, 0.08);
+  border-radius: 8px;
+  padding: 0.6rem 0.8rem;
   margin: 0;
 }
 
 .auth-submit {
   margin-top: 0.4rem;
-  padding: 0.8rem 1rem;
+  padding: 0.85rem 1rem;
   border: none;
-  background: var(--ink);
-  color: var(--paper);
+  border-radius: 8px;
+  background: var(--accent, var(--ink));
+  color: #fff;
   font-family: "Public Sans", sans-serif;
   font-size: 0.95rem;
   font-weight: 600;
   cursor: pointer;
-  transition: opacity 0.15s ease;
+  transition: opacity 0.15s ease, transform 0.15s ease;
 }
 
 .auth-submit:disabled {
@@ -177,7 +214,8 @@
 }
 
 .auth-submit:not(:disabled):hover {
-  opacity: 0.88;
+  opacity: 0.9;
+  transform: translateY(-1px);
 }
 
 @media (max-width: 760px) {
@@ -191,5 +229,13 @@
 
   .auth-role-mark {
     display: none;
+  }
+
+  .auth-panel-inner {
+    box-shadow: none;
+    border: none;
+    background: none;
+    padding: 0;
+    max-width: 420px;
   }
 }

@@ -1,0 +1,214 @@
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500&family=Public+Sans:wght@400;500;600&display=swap");
+
+.mydrives-shell {
+  min-height: 100vh;
+  background: #f2efe6;
+  color: #14181c;
+  font-family: "Public Sans", sans-serif;
+}
+
+.mydrives-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 2.5rem;
+  border-bottom: 1px solid #d8d3c6;
+}
+
+.mydrives-mark {
+  font-family: "Fraunces", serif;
+  font-size: 1.05rem;
+}
+
+.mydrives-back {
+  color: #8a6d3b;
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border: 1px solid #8a6d3b;
+  border-radius: 6px;
+  padding: 0.5rem 0.9rem;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.mydrives-back:hover {
+  background: #8a6d3b;
+  color: #fff;
+}
+
+.mydrives-body {
+  padding: 3rem 2.5rem 5rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.mydrives-top {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.mydrives-eyebrow {
+  font-size: 0.85rem;
+  opacity: 0.6;
+  margin: 0 0 0.5rem;
+}
+
+.mydrives-headline {
+  font-family: "Fraunces", serif;
+  font-weight: 500;
+  font-size: clamp(1.7rem, 3vw, 2.2rem);
+  margin: 0;
+}
+
+.mydrives-new {
+  background: #3b6e8f;
+  color: #fff;
+  text-decoration: none;
+  padding: 0.65rem 1.1rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: opacity 0.15s ease;
+}
+
+.mydrives-new:hover {
+  opacity: 0.88;
+}
+
+.mydrives-error {
+  font-size: 0.85rem;
+  color: #b3432e;
+  background: rgba(179, 67, 46, 0.08);
+  border-radius: 8px;
+  padding: 0.6rem 0.8rem;
+  margin: 0 0 1.5rem;
+}
+
+.mydrives-loading {
+  opacity: 0.6;
+}
+
+.mydrives-empty {
+  background: #fffdf8;
+  border: 1px dashed #d8d3c6;
+  border-radius: 14px;
+  padding: 3rem 2rem;
+  text-align: center;
+}
+
+.mydrives-empty p {
+  margin: 0 0 1rem;
+  opacity: 0.7;
+}
+
+.mydrives-empty-cta {
+  color: #3b6e8f;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.mydrives-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.1rem;
+}
+
+.mydrives-card {
+  background: #fffdf8;
+  border: 1px solid #d8d3c6;
+  border-radius: 12px;
+  padding: 1.5rem 1.5rem 1.25rem;
+  box-shadow: 0 8px 24px rgba(20, 24, 28, 0.05);
+}
+
+.mydrives-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.9rem;
+}
+
+.mydrives-status {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: capitalize;
+  padding: 0.3rem 0.65rem;
+  border-radius: 999px;
+}
+
+.mydrives-status--live {
+  background: rgba(58, 122, 74, 0.12);
+  color: #3a7a4a;
+}
+
+.mydrives-status--draft {
+  background: rgba(20, 24, 28, 0.08);
+  color: rgba(20, 24, 28, 0.6);
+}
+
+.mydrives-status--closed {
+  background: rgba(179, 67, 46, 0.1);
+  color: #b3432e;
+}
+
+.mydrives-type {
+  font-size: 0.78rem;
+  opacity: 0.55;
+}
+
+.mydrives-card-title {
+  font-family: "Fraunces", serif;
+  font-weight: 500;
+  font-size: 1.2rem;
+  margin: 0 0 0.4rem;
+}
+
+.mydrives-card-meta {
+  font-size: 0.85rem;
+  opacity: 0.65;
+  margin: 0 0 1.1rem;
+}
+
+.mydrives-card-actions {
+  display: flex;
+  gap: 0.6rem;
+  border-top: 1px solid #d8d3c6;
+  padding-top: 1rem;
+}
+
+.mydrives-view,
+.mydrives-edit {
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  color: #14181c;
+}
+
+.mydrives-view:hover,
+.mydrives-edit:hover {
+  text-decoration: underline;
+}
+
+.mydrives-delete {
+  margin-left: auto;
+  background: none;
+  border: none;
+  color: #b3432e;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: "Public Sans", sans-serif;
+}
+
+.mydrives-delete:hover {
+  text-decoration: underline;
+}
+
+.mydrives-delete:disabled {
+  opacity: 0.5;
+  cursor: default;
+}

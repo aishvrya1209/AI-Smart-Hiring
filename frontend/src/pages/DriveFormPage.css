@@ -1,0 +1,172 @@
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Public+Sans:wght@400;500;600&display=swap");
+
+.driveform-shell {
+  min-height: 100vh;
+  background: #f2efe6;
+  color: #14181c;
+  font-family: "Public Sans", sans-serif;
+}
+
+.driveform-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 2.5rem;
+  border-bottom: 1px solid #d8d3c6;
+}
+
+.driveform-mark {
+  font-family: "Fraunces", serif;
+  font-size: 1.05rem;
+}
+
+.driveform-back {
+  color: #8a6d3b;
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border: 1px solid #8a6d3b;
+  border-radius: 6px;
+  padding: 0.5rem 0.9rem;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.driveform-back:hover {
+  background: #8a6d3b;
+  color: #fff;
+}
+
+.driveform-body {
+  padding: 3rem 2.5rem 5rem;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.driveform-loading {
+  opacity: 0.6;
+}
+
+.driveform-card {
+  background: #fffdf8;
+  border: 1px solid #d8d3c6;
+  border-radius: 14px;
+  box-shadow: 0 8px 24px rgba(20, 24, 28, 0.06);
+  padding: 2.25rem 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.driveform-eyebrow {
+  font-size: 0.85rem;
+  opacity: 0.6;
+  margin: 0;
+}
+
+.driveform-headline {
+  font-family: "Fraunces", serif;
+  font-weight: 500;
+  font-size: clamp(1.6rem, 3vw, 2rem);
+  margin: 0 0 0.5rem;
+}
+
+.driveform-error {
+  font-size: 0.85rem;
+  color: #b3432e;
+  background: rgba(179, 67, 46, 0.08);
+  border-radius: 8px;
+  padding: 0.6rem 0.8rem;
+  margin: 0;
+}
+
+.driveform-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.1rem;
+}
+
+.driveform-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: rgba(20, 24, 28, 0.7);
+}
+
+.driveform-field input,
+.driveform-field select,
+.driveform-field textarea {
+  font-family: "Public Sans", sans-serif;
+  font-size: 1rem;
+  padding: 0.65rem 0.75rem;
+  border: 1px solid #d8d3c6;
+  border-radius: 8px;
+  background: #fff;
+  color: #14181c;
+  resize: vertical;
+}
+
+.driveform-field input:focus-visible,
+.driveform-field select:focus-visible,
+.driveform-field textarea:focus-visible {
+  outline: none;
+  border-color: #3b6e8f;
+  box-shadow: 0 0 0 3px rgba(59, 110, 143, 0.15);
+}
+
+.driveform-actions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.driveform-submit {
+  padding: 0.8rem 1.2rem;
+  border: none;
+  border-radius: 6px;
+  background: #3b6e8f;
+  color: #fff;
+  font-family: "Public Sans", sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+}
+
+.driveform-submit:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.driveform-submit:not(:disabled):hover {
+  opacity: 0.88;
+}
+
+.driveform-cancel {
+  padding: 0.8rem 1.2rem;
+  border: 1px solid #d8d3c6;
+  border-radius: 6px;
+  background: none;
+  color: #14181c;
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  transition: border-color 0.15s ease;
+}
+
+.driveform-cancel:hover {
+  border-color: #14181c;
+}
+
+@media (max-width: 560px) {
+  .driveform-row {
+    grid-template-columns: 1fr;
+  }
+
+  .driveform-card {
+    padding: 1.75rem;
+  }
+}
