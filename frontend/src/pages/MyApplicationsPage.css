@@ -1,0 +1,178 @@
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Public+Sans:wght@400;500;600&display=swap");
+
+.myapps-shell {
+  min-height: 100vh;
+  background: #f2efe6;
+  color: #14181c;
+  font-family: "Public Sans", sans-serif;
+}
+
+.myapps-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 2.5rem;
+  border-bottom: 1px solid #d8d3c6;
+}
+
+.myapps-mark {
+  font-family: "Fraunces", serif;
+  font-size: 1.05rem;
+  color: #14181c;
+  text-decoration: none;
+}
+
+.myapps-back {
+  color: #3b6e8f;
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.myapps-back:hover {
+  text-decoration: underline;
+}
+
+.myapps-body {
+  padding: 3rem 2.5rem 5rem;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.myapps-eyebrow {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #8a6d3b;
+  margin: 0 0 0.5rem;
+}
+
+.myapps-headline {
+  font-family: "Fraunces", serif;
+  font-weight: 500;
+  font-size: clamp(1.8rem, 3.2vw, 2.4rem);
+  margin: 0 0 2rem;
+}
+
+.myapps-loading,
+.myapps-error {
+  opacity: 0.6;
+}
+
+.myapps-error {
+  color: #b3432e;
+}
+
+.myapps-empty {
+  background: #fffdf8;
+  border: 1px solid #d8d3c6;
+  border-radius: 14px;
+  padding: 2.5rem;
+  text-align: center;
+}
+
+.myapps-empty p {
+  margin: 0 0 1rem;
+  opacity: 0.7;
+}
+
+.myapps-empty-cta {
+  color: #3b6e8f;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.myapps-empty-cta:hover {
+  text-decoration: underline;
+}
+
+.myapps-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.myapps-card {
+  background: #fffdf8;
+  border: 1px solid #d8d3c6;
+  border-radius: 14px;
+  padding: 1.5rem 1.75rem;
+  box-shadow: 0 8px 24px rgba(20, 24, 28, 0.06);
+}
+
+.myapps-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.myapps-status {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.3rem 0.65rem;
+  border-radius: 999px;
+}
+
+.myapps-status--Applied {
+  background: rgba(59, 110, 143, 0.12);
+  color: #3b6e8f;
+}
+
+.myapps-status--Shortlisted {
+  background: rgba(138, 109, 59, 0.14);
+  color: #8a6d3b;
+}
+
+.myapps-status--Selected {
+  background: rgba(58, 122, 74, 0.12);
+  color: #3a7a4a;
+}
+
+.myapps-status--Rejected {
+  background: rgba(179, 67, 46, 0.1);
+  color: #b3432e;
+}
+
+.myapps-status--Withdrawn {
+  background: rgba(20, 24, 28, 0.08);
+  color: rgba(20, 24, 28, 0.6);
+}
+
+.myapps-applied-on {
+  font-size: 0.78rem;
+  opacity: 0.55;
+}
+
+.myapps-card-title {
+  display: block;
+  font-family: "Fraunces", serif;
+  font-weight: 500;
+  font-size: 1.15rem;
+  color: #14181c;
+  text-decoration: none;
+  margin-bottom: 0.35rem;
+}
+
+.myapps-card-title:hover {
+  text-decoration: underline;
+}
+
+.myapps-card-title--removed {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.myapps-card-meta {
+  font-size: 0.88rem;
+  opacity: 0.65;
+  margin: 0 0 0.5rem;
+}
+
+.myapps-card-round {
+  font-size: 0.78rem;
+  opacity: 0.5;
+  margin: 0;
+}

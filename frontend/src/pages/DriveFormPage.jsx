@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Navigate, useNavigate, useParams, Link } from "react-router-dom";
 import { getDrive, createDrive, updateDrive } from "../api/placementDrives";
+import { getCompanyProfile } from "../api/companyProfile";
 import "./DriveFormPage.css";
 
 const emptyForm = {
@@ -35,6 +36,20 @@ export default function DriveFormPage() {
     saving: false,
     error: "",
   });
+  const [verification, setVerification] = useState(isEdit ? "approved" : null);
+
+  useEffect(() => {
+    if (isEdit) return;
+
+    (async () => {
+      try {
+        const profileData = await getCompanyProfile();
+        setVerification(profileData.company?.verificationStatus || "pending");
+      } catch {
+        setVerification("pending");
+      }
+    })();
+  }, [isEdit]);
 
   useEffect(() => {
     if (!isEdit) return;
@@ -94,8 +109,26 @@ export default function DriveFormPage() {
       </header>
 
       <main className="driveform-body">
-        {status.loading ? (
+        {status.loading || verification === null ? (
           <p className="driveform-loading">Loading…</p>
+        ) : verification !== "approved" ? (
+          <div className="driveform-card">
+            <p className="driveform-eyebrow">New placement drive</p>
+            <h1 className="driveform-headline">Verification required</h1>
+            <p className="driveform-blocked-note">
+              {verification === "pending"
+                ? "Your company account is pending admin verification. You'll be able to create placement drives once an admin approves your profile."
+                : "Your company verification was rejected. Update your company profile and resubmit before you can create drives."}
+            </p>
+            <div className="driveform-actions">
+              <Link to="/company/drives" className="driveform-cancel">
+                ← Back to my drives
+              </Link>
+              <Link to="/company/profile" className="driveform-submit">
+                Go to company profile
+              </Link>
+            </div>
+          </div>
         ) : (
           <form className="driveform-card" onSubmit={handleSubmit}>
             <p className="driveform-eyebrow">

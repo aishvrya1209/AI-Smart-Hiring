@@ -79,6 +79,13 @@
   margin: 0;
 }
 
+.driveform-blocked-note {
+  font-size: 0.92rem;
+  line-height: 1.6;
+  opacity: 0.75;
+  margin: 0 0 1.75rem;
+}
+
 .driveform-row {
   display: grid;
   grid-template-columns: 1fr 1fr;

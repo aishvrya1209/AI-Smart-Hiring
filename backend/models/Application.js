@@ -10,7 +10,7 @@ const applicationSchema = new mongoose.Schema(
 
     jobId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Job",
+      ref: "placementDrive",
       required: true
     },
 

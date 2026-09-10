@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { getDrive } from "../api/placementDrives";
+import { applyForJob } from "../api/applications";
 import "./DriveDetailPage.css";
 
 function formatDate(value) {
@@ -16,6 +17,20 @@ export default function DriveDetailPage() {
   const { id } = useParams();
   const [drive, setDrive] = useState(null);
   const [status, setStatus] = useState({ loading: true, error: "" });
+  const [applyState, setApplyState] = useState({ submitting: false, error: "", applied: false });
+
+  const role = localStorage.getItem("role");
+  const isCandidate = role === "student";
+
+  async function handleApply() {
+    setApplyState({ submitting: true, error: "", applied: false });
+    try {
+      await applyForJob(id);
+      setApplyState({ submitting: false, error: "", applied: true });
+    } catch (err) {
+      setApplyState({ submitting: false, error: err.message, applied: false });
+    }
+  }
 
   useEffect(() => {
     (async () => {
@@ -75,6 +90,31 @@ export default function DriveDetailPage() {
                 <strong>{formatDate(drive.appEnd)}</strong>
               </div>
             </div>
+
+            {isCandidate && drive.status === "live" && (
+              <div className="drivedetail-apply">
+                {applyState.applied ? (
+                  <p className="drivedetail-apply-success">
+                    Application submitted!{" "}
+                    <Link to="/applications">View my applications →</Link>
+                  </p>
+                ) : (
+                  <>
+                    <button
+                      type="button"
+                      className="drivedetail-apply-btn"
+                      onClick={handleApply}
+                      disabled={applyState.submitting}
+                    >
+                      {applyState.submitting ? "Applying…" : "Apply now"}
+                    </button>
+                    {applyState.error && (
+                      <p className="drivedetail-apply-error">{applyState.error}</p>
+                    )}
+                  </>
+                )}
+              </div>
+            )}
           </div>
         )}
       </main>

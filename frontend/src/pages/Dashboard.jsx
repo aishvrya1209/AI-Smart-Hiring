@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import { Navigate, useNavigate, Link } from "react-router-dom";
+import { getCompanyProfile } from "../api/companyProfile";
 import "./Dashboard.css";
 
 export default function Dashboard() {
   const navigate = useNavigate();
   const [session, setSession] = useState(null);
+  const [verification, setVerification] = useState(null);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -15,6 +17,19 @@ export default function Dashboard() {
       setSession({ role, account: JSON.parse(account) });
     }
   }, []);
+
+  useEffect(() => {
+    if (!session || session.role !== "company") return;
+
+    (async () => {
+      try {
+        const data = await getCompanyProfile();
+        setVerification(data.company?.verificationStatus || "pending");
+      } catch {
+        setVerification("pending");
+      }
+    })();
+  }, [session]);
 
   function handleLogout() {
     localStorage.removeItem("token");
@@ -74,14 +89,35 @@ export default function Dashboard() {
             )}
 
             {session.role === "company" ? (
-              <Link to="/company/drives" className="dashboard-card">
-                <span className="dashboard-card-eyebrow">Company</span>
-                <h2 className="dashboard-card-title">Placement drives</h2>
-                <p className="dashboard-card-note">
-                  Create and manage your hiring drives.
-                </p>
-                <span className="dashboard-card-cta">Open →</span>
-              </Link>
+              verification === "approved" ? (
+                <Link to="/company/drives" className="dashboard-card">
+                  <span className="dashboard-card-eyebrow">Company</span>
+                  <h2 className="dashboard-card-title">Placement drives</h2>
+                  <p className="dashboard-card-note">
+                    Create and manage your hiring drives.
+                  </p>
+                  <span className="dashboard-card-cta">Open →</span>
+                </Link>
+              ) : (
+                <div className="dashboard-card dashboard-card--locked">
+                  <div className="dashboard-card-lockrow">
+                    <span className="dashboard-card-eyebrow">Company</span>
+                    <span
+                      className={`dashboard-card-lockbadge ${
+                        verification === "rejected" ? "dashboard-card-lockbadge--rejected" : ""
+                      }`}
+                    >
+                      {verification === "rejected" ? "Rejected" : "Pending verification"}
+                    </span>
+                  </div>
+                  <h2 className="dashboard-card-title">Placement drives</h2>
+                  <p className="dashboard-card-note">
+                    {verification === "rejected"
+                      ? "Your admin verification was rejected. Update your company profile and resubmit to unlock drive creation."
+                      : "Your account is awaiting admin verification. Once approved, you'll be able to create and manage placement drives here."}
+                  </p>
+                </div>
+              )
             ) : (
               <>
                 <Link to="/candidate/profile" className="dashboard-card">
@@ -97,6 +133,14 @@ export default function Dashboard() {
                   <h2 className="dashboard-card-title">Browse drives</h2>
                   <p className="dashboard-card-note">
                     Explore open drives and apply.
+                  </p>
+                  <span className="dashboard-card-cta">Open →</span>
+                </Link>
+                <Link to="/applications" className="dashboard-card">
+                  <span className="dashboard-card-eyebrow">Candidate</span>
+                  <h2 className="dashboard-card-title">My applications</h2>
+                  <p className="dashboard-card-note">
+                    Track the status of drives you've applied to.
                   </p>
                   <span className="dashboard-card-cta">Open →</span>
                 </Link>

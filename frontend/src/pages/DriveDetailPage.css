@@ -156,3 +156,47 @@
 .drivedetail-dates strong {
   font-size: 0.95rem;
 }
+
+.drivedetail-apply {
+  border-top: 1px solid #d8d3c6;
+  padding-top: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.drivedetail-apply-btn {
+  background: #8a6d3b;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.75rem 1.5rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.drivedetail-apply-btn:hover {
+  background: #745a2f;
+}
+
+.drivedetail-apply-btn:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.drivedetail-apply-error {
+  color: #b3432e;
+  font-size: 0.85rem;
+  margin: 0.75rem 0 0;
+}
+
+.drivedetail-apply-success {
+  font-size: 0.95rem;
+  color: #3a7a4a;
+  margin: 0;
+}
+
+.drivedetail-apply-success a {
+  color: #3b6e8f;
+  font-weight: 600;
+}

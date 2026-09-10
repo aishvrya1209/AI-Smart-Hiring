@@ -1,9 +1,22 @@
 const PlacementDrive = require("../models/placementDrive");
+const Company = require("../models/company");
 
 
 //Create a new drive 
 const createDrive = async (req, res) => {
     try {
+
+        const company = await Company.findById(req.user.id);
+
+        if (!company) {
+            return res.status(404).send("Company not found.");
+        }
+
+        if (company.verificationStatus !== "approved") {
+            return res.status(403).send(
+                "Your company is not verified yet. You can create drives once an admin approves your account."
+            );
+        }
 
         if (new Date(req.body.appEnd) <= new Date(req.body.appStart)) {
             return res.status(400).send("Application end date must be after start date.");

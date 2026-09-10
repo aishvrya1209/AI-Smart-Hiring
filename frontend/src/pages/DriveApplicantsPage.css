@@ -1,0 +1,253 @@
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Public+Sans:wght@400;500;600&display=swap");
+
+.applicants-shell {
+  min-height: 100vh;
+  background: #f2efe6;
+  color: #14181c;
+  font-family: "Public Sans", sans-serif;
+}
+
+.applicants-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 2.5rem;
+  border-bottom: 1px solid #d8d3c6;
+}
+
+.applicants-mark {
+  font-family: "Fraunces", serif;
+  font-size: 1.05rem;
+  color: #14181c;
+  text-decoration: none;
+}
+
+.applicants-back {
+  color: #8a6d3b;
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border: 1px solid #8a6d3b;
+  border-radius: 6px;
+  padding: 0.5rem 0.9rem;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.applicants-back:hover {
+  background: #8a6d3b;
+  color: #fff;
+}
+
+.applicants-body {
+  padding: 3rem 2.5rem 5rem;
+  max-width: 820px;
+  margin: 0 auto;
+}
+
+.applicants-eyebrow {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #8a6d3b;
+  margin: 0 0 0.5rem;
+}
+
+.applicants-headline {
+  font-family: "Fraunces", serif;
+  font-weight: 500;
+  font-size: clamp(1.8rem, 3.2vw, 2.4rem);
+  margin: 0 0 2rem;
+}
+
+.applicants-loading {
+  opacity: 0.6;
+}
+
+.applicants-error {
+  font-size: 0.85rem;
+  color: #b3432e;
+  background: rgba(179, 67, 46, 0.08);
+  border-radius: 8px;
+  padding: 0.6rem 0.8rem;
+  margin: 0 0 1.5rem;
+}
+
+.applicants-empty {
+  background: #fffdf8;
+  border: 1px dashed #d8d3c6;
+  border-radius: 14px;
+  padding: 3rem 2rem;
+  text-align: center;
+}
+
+.applicants-empty p {
+  margin: 0;
+  opacity: 0.7;
+}
+
+.applicants-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.applicants-card {
+  background: #fffdf8;
+  border: 1px solid #d8d3c6;
+  border-radius: 14px;
+  padding: 1.5rem 1.75rem;
+  box-shadow: 0 8px 24px rgba(20, 24, 28, 0.06);
+}
+
+.applicants-card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.applicants-card-name {
+  font-family: "Fraunces", serif;
+  font-weight: 500;
+  font-size: 1.1rem;
+  margin: 0 0 0.2rem;
+}
+
+.applicants-card-email {
+  font-size: 0.85rem;
+  opacity: 0.6;
+  margin: 0;
+}
+
+.applicants-status {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.3rem 0.65rem;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.applicants-status--Applied {
+  background: rgba(59, 110, 143, 0.12);
+  color: #3b6e8f;
+}
+
+.applicants-status--Shortlisted {
+  background: rgba(138, 109, 59, 0.14);
+  color: #8a6d3b;
+}
+
+.applicants-status--Selected {
+  background: rgba(58, 122, 74, 0.12);
+  color: #3a7a4a;
+}
+
+.applicants-status--Rejected {
+  background: rgba(179, 67, 46, 0.1);
+  color: #b3432e;
+}
+
+.applicants-status--Withdrawn {
+  background: rgba(20, 24, 28, 0.08);
+  color: rgba(20, 24, 28, 0.6);
+}
+
+.applicants-card-details {
+  border-top: 1px solid #d8d3c6;
+  padding-top: 0.85rem;
+  margin-top: 0.5rem;
+  font-size: 0.88rem;
+}
+
+.applicants-card-details p {
+  margin: 0 0 0.4rem;
+  opacity: 0.75;
+}
+
+.applicants-card-skills {
+  font-style: italic;
+}
+
+.applicants-card-links {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.applicants-card-links a {
+  color: #3b6e8f;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.applicants-card-links a:hover {
+  text-decoration: underline;
+}
+
+.applicants-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid #d8d3c6;
+  padding-top: 0.85rem;
+  margin-top: 0.85rem;
+}
+
+.applicants-applied-on {
+  font-size: 0.78rem;
+  opacity: 0.55;
+}
+
+.applicants-action-buttons {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.applicants-action-btn {
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 0.45rem 0.9rem;
+  border-radius: 6px;
+  cursor: pointer;
+  background: #fff;
+  transition: opacity 0.15s ease, background 0.15s ease, color 0.15s ease;
+}
+
+.applicants-action-btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.applicants-action-btn--Shortlisted {
+  border: 1px solid #8a6d3b;
+  color: #8a6d3b;
+}
+
+.applicants-action-btn--Shortlisted:hover:not(:disabled) {
+  background: #8a6d3b;
+  color: #fff;
+}
+
+.applicants-action-btn--Shortlisted.applicants-action-btn--active {
+  background: #8a6d3b;
+  color: #fff;
+}
+
+.applicants-action-btn--Rejected {
+  border: 1px solid #b3432e;
+  color: #b3432e;
+}
+
+.applicants-action-btn--Rejected:hover:not(:disabled) {
+  background: #b3432e;
+  color: #fff;
+}
+
+.applicants-action-btn--Rejected.applicants-action-btn--active {
+  background: #b3432e;
+  color: #fff;
+}
