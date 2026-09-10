@@ -1,0 +1,260 @@
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500&family=Public+Sans:wght@400;500;600&display=swap");
+
+.admindash-shell {
+  min-height: 100vh;
+  background: #f2efe6;
+  color: #14181c;
+  font-family: "Public Sans", sans-serif;
+}
+
+.admindash-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 2.5rem;
+  border-bottom: 1px solid #d8d3c6;
+}
+
+.admindash-mark {
+  font-family: "Fraunces", serif;
+  font-size: 1.05rem;
+}
+
+.admindash-header-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.admindash-name {
+  font-size: 0.85rem;
+  color: #4a4f54;
+}
+
+.admindash-logout {
+  border: 1px solid #8a6d3b;
+  background: none;
+  color: #8a6d3b;
+  border-radius: 6px;
+  padding: 0.5rem 0.9rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.admindash-logout:hover {
+  background: #8a6d3b;
+  color: #fff;
+}
+
+.admindash-body {
+  padding: 3rem 2.5rem 5rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.admindash-top {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+
+.admindash-eyebrow {
+  font-size: 0.85rem;
+  color: #8a6d3b;
+  margin: 0 0 0.4rem;
+}
+
+.admindash-headline {
+  font-family: "Fraunces", serif;
+  font-weight: 500;
+  font-size: 1.9rem;
+  margin: 0;
+}
+
+.admindash-refresh {
+  border: 1px solid #d8d3c6;
+  background: #fff;
+  color: #14181c;
+  border-radius: 6px;
+  padding: 0.55rem 1rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.admindash-refresh:hover {
+  border-color: #3b6e8f;
+}
+
+.admindash-error {
+  background: #f6e6e4;
+  color: #a4423a;
+  padding: 0.8rem 1rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+}
+
+.admindash-loading,
+.admindash-empty {
+  color: #4a4f54;
+  font-size: 0.95rem;
+}
+
+.admindash-empty {
+  border: 1px dashed #d8d3c6;
+  border-radius: 8px;
+  padding: 2.5rem;
+  text-align: center;
+}
+
+.admindash-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.admindash-card {
+  background: #fff;
+  border: 1px solid #d8d3c6;
+  border-radius: 10px;
+  padding: 1.5rem 1.75rem;
+}
+
+.admindash-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.admindash-card-title {
+  font-family: "Fraunces", serif;
+  font-weight: 500;
+  font-size: 1.25rem;
+  margin: 0;
+}
+
+.admindash-status {
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: #8a6d3b;
+  border: 1px solid #8a6d3b;
+  border-radius: 100px;
+  padding: 0.25rem 0.65rem;
+  white-space: nowrap;
+}
+
+.admindash-card-meta {
+  font-size: 0.85rem;
+  color: #4a4f54;
+  margin: 0.35rem 0 0.9rem;
+}
+
+.admindash-card-line {
+  font-size: 0.85rem;
+  margin: 0.25rem 0;
+}
+
+.admindash-card-line a {
+  color: #3b6e8f;
+}
+
+.admindash-card-desc {
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: #2e3237;
+  margin: 0.75rem 0 0;
+}
+
+.admindash-card-actions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+}
+
+.admindash-approve,
+.admindash-reject,
+.admindash-cancel,
+.admindash-reject-confirm {
+  border-radius: 6px;
+  padding: 0.55rem 1rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+
+.admindash-approve {
+  background: #2f6b4f;
+  color: #fff;
+}
+
+.admindash-approve:hover:not(:disabled) {
+  background: #26583f;
+}
+
+.admindash-reject {
+  background: none;
+  border-color: #a4423a;
+  color: #a4423a;
+}
+
+.admindash-reject:hover:not(:disabled) {
+  background: #a4423a;
+  color: #fff;
+}
+
+.admindash-approve:disabled,
+.admindash-reject:disabled,
+.admindash-cancel:disabled,
+.admindash-reject-confirm:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.admindash-reject-box {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #d8d3c6;
+}
+
+.admindash-reject-input {
+  width: 100%;
+  font-family: "Public Sans", sans-serif;
+  font-size: 0.88rem;
+  padding: 0.65rem 0.8rem;
+  border: 1px solid #d8d3c6;
+  border-radius: 6px;
+  resize: vertical;
+  box-sizing: border-box;
+}
+
+.admindash-reject-input:focus {
+  outline: none;
+  border-color: #3b6e8f;
+}
+
+.admindash-cancel {
+  background: none;
+  border-color: #d8d3c6;
+  color: #14181c;
+}
+
+.admindash-cancel:hover:not(:disabled) {
+  border-color: #14181c;
+}
+
+.admindash-reject-confirm {
+  background: #a4423a;
+  color: #fff;
+}
+
+.admindash-reject-confirm:hover:not(:disabled) {
+  background: #872f28;
+}
