@@ -12,6 +12,53 @@ function formatDate(value) {
   });
 }
 
+const SECTIONS = [
+  { key: "Shortlisted", title: "Shortlisted", match: (s) => s === "Shortlisted" },
+  { key: "Rejected", title: "Rejected", match: (s) => s === "Rejected" },
+  {
+    key: "Other",
+    title: "In progress",
+    match: (s) => s !== "Shortlisted" && s !== "Rejected",
+  },
+];
+
+function ApplicationCard({ app }) {
+  return (
+    <div className="myapps-card">
+      <div className="myapps-card-top">
+        <span className={`myapps-status myapps-status--${app.status}`}>
+          {app.status}
+        </span>
+        <span className="myapps-applied-on">
+          Applied {formatDate(app.appliedAt || app.createdAt)}
+        </span>
+      </div>
+
+      {app.jobId?.companyId?.companyName && (
+        <p className="myapps-card-company">{app.jobId.companyId.companyName}</p>
+      )}
+
+      {app.jobId ? (
+        <Link to={`/drives/${app.jobId._id}`} className="myapps-card-title">
+          {app.jobId.title}
+        </Link>
+      ) : (
+        <span className="myapps-card-title myapps-card-title--removed">
+          Drive no longer available
+        </span>
+      )}
+
+      {app.jobId && (
+        <p className="myapps-card-meta">
+          {app.jobId.jobRole} · {app.jobId.location}
+        </p>
+      )}
+
+      <p className="myapps-card-round">Round {app.currentRound || 1}</p>
+    </div>
+  );
+}
+
 export default function MyApplicationsPage() {
   const [applications, setApplications] = useState([]);
   const [status, setStatus] = useState({ loading: true, error: "" });
@@ -55,37 +102,25 @@ export default function MyApplicationsPage() {
             </Link>
           </div>
         ) : (
-          <div className="myapps-list">
-            {applications.map((app) => (
-              <div key={app._id} className="myapps-card">
-                <div className="myapps-card-top">
-                  <span className={`myapps-status myapps-status--${app.status}`}>
-                    {app.status}
-                  </span>
-                  <span className="myapps-applied-on">
-                    Applied {formatDate(app.appliedAt || app.createdAt)}
-                  </span>
-                </div>
+          <div className="myapps-sections">
+            {SECTIONS.map((section) => {
+              const items = applications.filter((app) => section.match(app.status));
+              if (items.length === 0) return null;
 
-                {app.jobId ? (
-                  <Link to={`/drives/${app.jobId._id}`} className="myapps-card-title">
-                    {app.jobId.title}
-                  </Link>
-                ) : (
-                  <span className="myapps-card-title myapps-card-title--removed">
-                    Drive no longer available
-                  </span>
-                )}
-
-                {app.jobId && (
-                  <p className="myapps-card-meta">
-                    {app.jobId.jobRole} · {app.jobId.location}
-                  </p>
-                )}
-
-                <p className="myapps-card-round">Round {app.currentRound || 1}</p>
-              </div>
-            ))}
+              return (
+                <section key={section.key} className="myapps-section">
+                  <h2 className="myapps-section-title">
+                    {section.title}
+                    <span className="myapps-section-count">{items.length}</span>
+                  </h2>
+                  <div className="myapps-list">
+                    {items.map((app) => (
+                      <ApplicationCard key={app._id} app={app} />
+                    ))}
+                  </div>
+                </section>
+              );
+            })}
           </div>
         )}
       </main>

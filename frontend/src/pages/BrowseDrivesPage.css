@@ -110,6 +110,14 @@
   opacity: 0.55;
 }
 
+.browse-card-company {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: #8a6d3b;
+  margin: 0 0 0.3rem;
+}
+
 .browse-card-title {
   font-family: "Fraunces", serif;
   font-weight: 500;

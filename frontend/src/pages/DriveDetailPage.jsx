@@ -21,6 +21,8 @@ export default function DriveDetailPage() {
 
   const role = localStorage.getItem("role");
   const isCandidate = role === "student";
+  const isExpired = drive && drive.appEnd && new Date(drive.appEnd) < new Date();
+  const canApply = isCandidate && drive?.status === "live" && !isExpired;
 
   async function handleApply() {
     setApplyState({ submitting: true, error: "", applied: false });
@@ -68,6 +70,9 @@ export default function DriveDetailPage() {
               <span className="drivedetail-type">{drive.empType}</span>
             </div>
 
+            <p className="drivedetail-company">
+              {drive.companyId?.companyName || "Hiring company"}
+            </p>
             <h1 className="drivedetail-title">{drive.title}</h1>
             <p className="drivedetail-meta">
               {drive.jobRole} · {drive.location} · {drive.salary}
@@ -91,7 +96,13 @@ export default function DriveDetailPage() {
               </div>
             </div>
 
-            {isCandidate && drive.status === "live" && (
+            {isCandidate && drive.status === "live" && isExpired && (
+              <p className="drivedetail-closed-note">
+                The application deadline for this drive has passed.
+              </p>
+            )}
+
+            {canApply && (
               <div className="drivedetail-apply">
                 {applyState.applied ? (
                   <p className="drivedetail-apply-success">

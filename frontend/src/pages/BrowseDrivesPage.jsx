@@ -21,7 +21,10 @@ export default function BrowseDrivesPage() {
     (async () => {
       try {
         const all = await getAllDrives();
-        let live = all.filter((d) => d.status === "live");
+        const now = new Date();
+        let live = all.filter(
+          (d) => d.status === "live" && (!d.appEnd || new Date(d.appEnd) >= now)
+        );
 
         const role = localStorage.getItem("role");
         const hasToken = !!localStorage.getItem("token");
@@ -80,6 +83,9 @@ export default function BrowseDrivesPage() {
                     Apply by {formatDate(drive.appEnd)}
                   </span>
                 </div>
+                <p className="browse-card-company">
+                  {drive.companyId?.companyName || "Hiring company"}
+                </p>
                 <h2 className="browse-card-title">{drive.title}</h2>
                 <p className="browse-card-meta">
                   {drive.jobRole} · {drive.location}

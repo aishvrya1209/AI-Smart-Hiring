@@ -164,10 +164,11 @@ export default function AuthPage() {
 
             {mode === "signup" && role === "company" && (
               <Field
-                label="Phone (optional)"
+                label="Phone"
                 type="tel"
                 value={current.phone}
                 onChange={(v) => updateField("phone", v)}
+                required
               />
             )}
 

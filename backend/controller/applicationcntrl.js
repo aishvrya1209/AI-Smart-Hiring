@@ -1,5 +1,5 @@
 const Application = require("../models/Application");
-const Candidate = require("../models/CandidateProfile");
+const Candidate = require("../models/candidateprofile");
 const Job = require("../models/placementDrive");
 
 // ==========================================
@@ -25,6 +25,15 @@ const applyForJob = async (req, res) => {
     if (!job) {
       return res.status(404).json({
         message: "Job not found"
+      });
+    }
+
+    // Block applications once the drive is closed/draft or its deadline has passed,
+    // even if the request bypasses the frontend's Apply button.
+    const isExpired = job.appEnd && new Date(job.appEnd) < new Date();
+    if (job.status !== "live" || isExpired) {
+      return res.status(400).json({
+        message: "This drive is no longer accepting applications."
       });
     }
 
@@ -81,7 +90,10 @@ const getMyApplications = async (req, res) => {
     const applications = await Application.find({
       candidateId: candidate._id
     })
-      .populate("jobId")
+      .populate({
+        path: "jobId",
+        populate: { path: "companyId", select: "companyName" }
+      })
       .sort({ createdAt: -1 });
 
     res.status(200).json({

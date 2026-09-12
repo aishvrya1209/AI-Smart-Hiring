@@ -37,7 +37,7 @@ const createDrive = async (req, res) => {
 // All Drives 
 const allDrives = async (req, res) => {
     try {
-        const drives = await PlacementDrive.find();
+        const drives = await PlacementDrive.find().populate("companyId", "companyName");
         res.status(200).send(drives);
     } catch (err) {
         res.status(500).send(err);
@@ -51,7 +51,7 @@ const showDrive = async (req, res) => {
 
     try {
         const id = req.params.id;
-        const drive = await PlacementDrive.findById(id);
+        const drive = await PlacementDrive.findById(id).populate("companyId", "companyName");
         if (!drive) {
             // throw new ExpressError(404, "Listing Not Found");
             res.status(404).send("Drive is not available for the specified ID");

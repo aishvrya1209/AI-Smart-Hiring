@@ -88,6 +88,40 @@
   text-decoration: underline;
 }
 
+.myapps-sections {
+  display: flex;
+  flex-direction: column;
+  gap: 2.25rem;
+}
+
+.myapps-section-title {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: "Fraunces", serif;
+  font-weight: 500;
+  font-size: 1.15rem;
+  margin: 0 0 1rem;
+}
+
+.myapps-section-count {
+  font-family: "Public Sans", sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  opacity: 0.5;
+  background: rgba(20, 24, 28, 0.06);
+  border-radius: 999px;
+  padding: 0.15rem 0.55rem;
+}
+
+.myapps-card-company {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: #8a6d3b;
+  margin: 0 0 0.35rem;
+}
+
 .myapps-list {
   display: flex;
   flex-direction: column;
