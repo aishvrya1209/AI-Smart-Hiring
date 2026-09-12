@@ -79,6 +79,39 @@
   opacity: 0.88;
 }
 
+.mydrives-new--disabled {
+  background: rgba(20, 24, 28, 0.15);
+  color: rgba(20, 24, 28, 0.5);
+  cursor: not-allowed;
+}
+
+.mydrives-new--disabled:hover {
+  opacity: 1;
+}
+
+.mydrives-verify-banner {
+  border-radius: 10px;
+  padding: 0.85rem 1.1rem;
+  margin-bottom: 1.5rem;
+  font-size: 0.88rem;
+}
+
+.mydrives-verify-banner p {
+  margin: 0;
+}
+
+.mydrives-verify-banner--pending {
+  background: rgba(138, 109, 59, 0.1);
+  color: #6b5429;
+  border: 1px solid rgba(138, 109, 59, 0.3);
+}
+
+.mydrives-verify-banner--rejected {
+  background: rgba(179, 67, 46, 0.08);
+  color: #8a3423;
+  border: 1px solid rgba(179, 67, 46, 0.3);
+}
+
 .mydrives-error {
   font-size: 0.85rem;
   color: #b3432e;

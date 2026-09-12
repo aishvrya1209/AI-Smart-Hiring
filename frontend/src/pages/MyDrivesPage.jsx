@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Navigate, Link } from "react-router-dom";
 import { getAllDrives, deleteDrive } from "../api/placementDrives";
+import { getCompanyProfile } from "../api/companyProfile";
 import "./MyDrivesPage.css";
 
 export default function MyDrivesPage() {
@@ -11,15 +12,20 @@ export default function MyDrivesPage() {
   const [drives, setDrives] = useState([]);
   const [status, setStatus] = useState({ loading: true, error: "" });
   const [deletingId, setDeletingId] = useState(null);
+  const [verification, setVerification] = useState(null);
 
   useEffect(() => {
     if (!hasToken || role !== "company") return;
 
     (async () => {
       try {
-        const all = await getAllDrives();
+        const [all, profileData] = await Promise.all([
+          getAllDrives(),
+          getCompanyProfile(),
+        ]);
         const mine = all.filter((d) => String(d.companyId) === String(account?.id));
         setDrives(mine);
+        setVerification(profileData.company?.verificationStatus || "pending");
         setStatus({ loading: false, error: "" });
       } catch (err) {
         setStatus({ loading: false, error: err.message });
@@ -58,10 +64,36 @@ export default function MyDrivesPage() {
             <p className="mydrives-eyebrow">Company</p>
             <h1 className="mydrives-headline">Your placement drives</h1>
           </div>
-          <Link to="/company/drives/new" className="mydrives-new">
-            + New drive
-          </Link>
+          {verification === "approved" ? (
+            <Link to="/company/drives/new" className="mydrives-new">
+              + New drive
+            </Link>
+          ) : (
+            <span
+              className="mydrives-new mydrives-new--disabled"
+              title="Your company must be verified before you can create drives"
+            >
+              + New drive
+            </span>
+          )}
         </div>
+
+        {verification && verification !== "approved" && (
+          <div className={`mydrives-verify-banner mydrives-verify-banner--${verification}`}>
+            {verification === "pending" && (
+              <p>
+                Your company account is <strong>pending admin verification</strong>. You'll be
+                able to create placement drives once an admin approves your profile.
+              </p>
+            )}
+            {verification === "rejected" && (
+              <p>
+                Your company verification was <strong>rejected</strong>. Update your company
+                profile and resubmit to be reviewed again before you can create drives.
+              </p>
+            )}
+          </div>
+        )}
 
         {status.error && <p className="mydrives-error">{status.error}</p>}
 
@@ -93,6 +125,9 @@ export default function MyDrivesPage() {
                 <div className="mydrives-card-actions">
                   <Link to={`/drives/${drive._id}`} className="mydrives-view">
                     View
+                  </Link>
+                  <Link to={`/company/drives/${drive._id}/applicants`} className="mydrives-view">
+                    Applicants
                   </Link>
                   <Link to={`/company/drives/${drive._id}/edit`} className="mydrives-edit">
                     Edit

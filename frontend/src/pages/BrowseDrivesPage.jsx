@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getAllDrives } from "../api/placementDrives";
+import { getMyApplications } from "../api/applications";
 import "./BrowseDrivesPage.css";
 
 function formatDate(value) {
@@ -20,7 +21,26 @@ export default function BrowseDrivesPage() {
     (async () => {
       try {
         const all = await getAllDrives();
-        const live = all.filter((d) => d.status === "live");
+        let live = all.filter((d) => d.status === "live");
+
+        const role = localStorage.getItem("role");
+        const hasToken = !!localStorage.getItem("token");
+
+        if (hasToken && role === "student") {
+          try {
+            const myApps = await getMyApplications();
+            const appliedIds = new Set(
+              (myApps.applications || [])
+                .filter((a) => a.jobId)
+                .map((a) => a.jobId._id)
+            );
+            live = live.filter((d) => !appliedIds.has(d._id));
+          } catch {
+            // No candidate profile yet, or not logged in as a candidate —
+            // just show every live drive.
+          }
+        }
+
         setDrives(live);
         setStatus({ loading: false, error: "" });
       } catch (err) {

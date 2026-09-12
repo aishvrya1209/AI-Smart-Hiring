@@ -153,6 +153,42 @@ a.dashboard-card:hover {
   margin-top: auto;
 }
 
+.dashboard-card--locked {
+  cursor: default;
+  background: #f7f4ec;
+  border-style: dashed;
+}
+
+.dashboard-card-lockrow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 0.6rem;
+}
+
+.dashboard-card-lockrow .dashboard-card-eyebrow {
+  margin-bottom: 0;
+}
+
+.dashboard-card-lockbadge {
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  background: rgba(138, 109, 59, 0.14);
+  color: #8a6d3b;
+}
+
+.dashboard-card-lockbadge--rejected {
+  background: rgba(179, 67, 46, 0.1);
+  color: #b3432e;
+}
+
+.dashboard-card--locked .dashboard-card-note {
+  margin-bottom: 0;
+}
+
 @media (max-width: 600px) {
   .dashboard-header {
     padding: 1.25rem 1.5rem;
