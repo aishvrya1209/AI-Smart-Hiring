@@ -8,7 +8,7 @@ const Job = require("../models/placementDrive");
 const applyForJob = async (req, res) => {
   try {
     const userId = req.user.userId;
-    const { jobId } = req.params;
+    const { driveId } = req.params;
 
     // Find candidate profile
     const candidate = await Candidate.findOne({ userId });
@@ -20,7 +20,7 @@ const applyForJob = async (req, res) => {
     }
 
     // Check whether job exists
-    const job = await Job.findById(jobId);
+    const job = await Job.findById(driveId);
 
     if (!job) {
       return res.status(404).json({
@@ -31,7 +31,7 @@ const applyForJob = async (req, res) => {
     // Check duplicate application
     const existingApplication = await Application.findOne({
       candidateId: candidate._id,
-      jobId: jobId
+      driveId: driveId
     });
 
     if (existingApplication) {
@@ -43,7 +43,7 @@ const applyForJob = async (req, res) => {
     // Create application
     const application = await Application.create({
       candidateId: candidate._id,
-      jobId: jobId,
+      driveId: driveId,
       resume: req.body.resume,
       coverLetter: req.body.coverLetter
     });
@@ -81,7 +81,7 @@ const getMyApplications = async (req, res) => {
     const applications = await Application.find({
       candidateId: candidate._id
     })
-      .populate("jobId")
+      .populate("driveId")
       .sort({ createdAt: -1 });
 
     res.status(200).json({
@@ -103,10 +103,10 @@ const getMyApplications = async (req, res) => {
 // ==========================================
 const getJobApplicants = async (req, res) => {
   try {
-    const { jobId } = req.params;
+    const { driveId } = req.params;
 
     // Check job exists
-    const job = await Job.findById(jobId);
+    const job = await Job.findById(driveId);
 
     if (!job) {
       return res.status(404).json({
@@ -115,7 +115,7 @@ const getJobApplicants = async (req, res) => {
     }
 
     const applications = await Application.find({
-      jobId: jobId
+      driveId: driveId
     })
       .populate("candidateId")
       .populate("jobId", "title companyId")

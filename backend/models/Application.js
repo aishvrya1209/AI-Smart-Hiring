@@ -8,7 +8,7 @@ const applicationSchema = new mongoose.Schema(
       required: true
     },
 
-    jobId: {
+    driveId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "placementDrive",
       required: true

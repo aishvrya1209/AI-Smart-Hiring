@@ -1,4 +1,4 @@
-const companyAuth = (req,res,next) =>{
+ const companyAuth = (req,res,next) =>{
         const role = req.user.role;
         if(role === "company")
             next();

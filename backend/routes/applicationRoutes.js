@@ -14,7 +14,7 @@ const router = express.Router();
 
 // Candidate applies for a job
 router.post(
-  "/:jobId",
+  "/:driveId",
   authMiddleware,
   applyForJob
 );
@@ -30,7 +30,7 @@ router.get(
 
 // Company sees applicants for a job
 router.get(
-  "/job/:jobId",
+  "/job/:driveId",
   authMiddleware,
   getJobApplicants
 );
