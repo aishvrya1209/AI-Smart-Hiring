@@ -47,7 +47,7 @@ const applicationSchema = new mongoose.Schema(
 
 // Same candidate should not apply to the same job twice
 applicationSchema.index(
-  { candidateId: 1, jobId: 1 },
+  { candidateId: 1, driveId: 1 },
   { unique: true }
 );
 
