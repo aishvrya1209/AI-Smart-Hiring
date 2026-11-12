@@ -10,6 +10,7 @@ const companyAuthRoutes = require("./routes/companyAuthRoutes");
 const companyProfileRoutes = require("./routes/companyProfileRoutes");
 const placementDriveRoutes = require("./routes/placementDriveRoutes.js")
 const applicationRoutes = require("./routes/applicationRoutes");
+const roundRoutes = require("./routes/roundRoutes");
 
 const connectDB = require("./db/db.js");
 
@@ -37,6 +38,8 @@ app.use("/api/admin", adminRoutes);
 app.use("/api/company/drives" , placementDriveRoutes);
 
 app.use("/api/applications", applicationRoutes);
+
+app.use("/api/rounds", roundRoutes);
 
 app.get("/", (req, res) => {
     res.json({
