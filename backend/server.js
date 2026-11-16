@@ -11,6 +11,9 @@ const companyProfileRoutes = require("./routes/companyProfileRoutes");
 const placementDriveRoutes = require("./routes/placementDriveRoutes.js")
 const applicationRoutes = require("./routes/applicationRoutes");
 const roundRoutes = require("./routes/roundRoutes");
+const aiQuestionRoutes = require("./routes/aiQuestionRoutes");
+
+
 
 const connectDB = require("./db/db.js");
 
@@ -40,6 +43,8 @@ app.use("/api/company/drives" , placementDriveRoutes);
 app.use("/api/applications", applicationRoutes);
 
 app.use("/api/rounds", roundRoutes);
+
+app.use("/api/ai-questions", aiQuestionRoutes);
 
 app.get("/", (req, res) => {
     res.json({
