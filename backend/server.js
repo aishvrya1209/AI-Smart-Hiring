@@ -45,6 +45,7 @@ app.use("/api/applications", applicationRoutes);
 app.use("/api/rounds", roundRoutes);
 
 app.use("/api/ai-questions", aiQuestionRoutes);
+app.use("/api/questions", require("./routes/questionRoutes"));
 
 app.get("/", (req, res) => {
     res.json({
