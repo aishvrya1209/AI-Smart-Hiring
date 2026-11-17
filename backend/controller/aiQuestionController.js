@@ -1,46 +1,27 @@
 
+
 const mongoose = require("mongoose");
 
 const Question = require("../models/question");
 const Round = require("../models/round");
 const PlacementDrive = require("../models/placementDrive");
+const TestConfiguration = require("../models/testConfiguration");
 
 const generateQuestions = require("../services/aiquestionservice");
 
 const generateAIQuestions = async (req, res) => {
   try {
-    const {
-      driveId,
-      roundId,
-      role,
-      category,
-      difficulty,
-      count,
-      topics
-    } = req.body;
-
-    // Get authenticated company ID from JWT
+    const { driveId, roundId } = req.body;
     const companyId = req.user.id;
 
-    // 1. Basic validation
-    if (
-      !companyId ||
-      !driveId ||
-      !roundId ||
-      !role ||
-      !category ||
-      !difficulty ||
-      count === undefined ||
-      !Array.isArray(topics) ||
-      topics.length === 0
-    ) {
+    // 1. Validate required IDs
+    if (!driveId || !roundId) {
       return res.status(400).json({
         success: false,
-        message: "Please provide all required fields"
+        message: "Please provide driveId and roundId"
       });
     }
 
-    // 2. Validate MongoDB ObjectIds
     if (
       !mongoose.Types.ObjectId.isValid(driveId) ||
       !mongoose.Types.ObjectId.isValid(roundId) ||
@@ -52,58 +33,10 @@ const generateAIQuestions = async (req, res) => {
       });
     }
 
-    // 3. Validate role
-    if (typeof role !== "string" || !role.trim()) {
-      return res.status(400).json({
-        success: false,
-        message: "Please provide a valid job role"
-      });
-    }
-
-    // 4. Validate category
-    if (!["APTITUDE", "TECHNICAL", "HR"].includes(category)) {
-      return res.status(400).json({
-        success: false,
-        message: "Invalid interview category"
-      });
-    }
-
-    // 5. Validate difficulty
-    if (!["EASY", "MEDIUM", "HARD"].includes(difficulty)) {
-      return res.status(400).json({
-        success: false,
-        message: "Invalid difficulty level"
-      });
-    }
-
-    // 6. Validate question count
-    if (!Number.isInteger(count) || count < 5 || count > 50) {
-      return res.status(400).json({
-        success: false,
-        message: "Question count must be between 5 and 50"
-      });
-    }
-
-    // 7. Validate topics
-    const cleanTopics = topics
-      .filter(topic => typeof topic === "string")
-      .map(topic => topic.trim())
-      .filter(topic => topic.length > 0);
-
-    if (
-      cleanTopics.length !== topics.length ||
-      cleanTopics.length === 0
-    ) {
-      return res.status(400).json({
-        success: false,
-        message: "Please provide valid topics"
-      });
-    }
-
-    // 8. Verify company owns the placement drive
+    // 2. Verify company owns the placement drive
     const drive = await PlacementDrive.findOne({
       _id: driveId,
-      companyId: companyId
+      companyId
     });
 
     if (!drive) {
@@ -113,10 +46,10 @@ const generateAIQuestions = async (req, res) => {
       });
     }
 
-    // 9. Verify round exists and belongs to this drive
+    // 3. Verify round belongs to this drive
     const round = await Round.findOne({
       _id: roundId,
-      driveId: driveId
+      driveId
     });
 
     if (!round) {
@@ -126,48 +59,120 @@ const generateAIQuestions = async (req, res) => {
       });
     }
 
-    // 10. Generate questions using Groq AI
-    const questions = await generateQuestions({
-      role: role.trim(),
-      round: category,
-      difficulty,
-      count,
-      topics: cleanTopics
+    // 4. Fetch saved test configuration
+    const configuration = await TestConfiguration.findOne({
+      driveId,
+      roundId,
+      companyId
     });
 
-    // 11. Prepare question documents
-    const questionDocuments = questions.map((q) => ({
+    if (!configuration) {
+      return res.status(404).json({
+        success: false,
+        message: "Test configuration not found. Configure the test first."
+      });
+    }
+
+    // 5. Validate saved configuration
+    if (
+      !Array.isArray(configuration.topics) ||
+      configuration.topics.length === 0
+    ) {
+      return res.status(400).json({
+        success: false,
+        message: "No topics found in test configuration"
+      });
+    }
+
+    const configuredCount = configuration.topics.reduce(
+      (sum, topic) => sum + Number(topic.questionCount),
+      0
+    );
+
+    if (configuredCount !== configuration.totalQuestions) {
+      return res.status(400).json({
+        success: false,
+        message: "Topic question distribution does not match totalQuestions"
+      });
+    }
+
+    // 6. Generate questions topic-wise
+    let allQuestions = [];
+
+    for (const topic of configuration.topics) {
+      const topicQuestions = await generateQuestions({
+        role: drive.jobRole,
+        round: configuration.category,
+        difficulty: configuration.difficulty,
+        count: topic.questionCount,
+        topics: [topic.name]
+      });
+
+      if (
+        !Array.isArray(topicQuestions) ||
+        topicQuestions.length !== topic.questionCount
+      ) {
+        throw new Error(
+          `AI generated incorrect question count for topic: ${topic.name}`
+        );
+      }
+
+      // Ensure every question is associated with its configured topic
+      const questionsWithTopic = topicQuestions.map((q) => ({
+        ...q,
+        topic: topic.name
+      }));
+
+      allQuestions.push(...questionsWithTopic);
+    }
+
+    // 7. Final question count validation
+    if (allQuestions.length !== configuration.totalQuestions) {
+      throw new Error("Generated question count does not match configuration");
+    }
+
+    // 8. Prepare question documents
+    const questionDocuments = allQuestions.map((q) => ({
       driveId,
       roundId,
       companyId,
 
       questionText: q.questionText,
       questionType: "MCQ",
-      category,
+      category: configuration.category,
       topic: q.topic,
-      difficulty,
+      difficulty: configuration.difficulty,
 
       options: q.options,
       correctAnswer: q.correctAnswer,
       explanation: q.explanation,
 
-      marks: q.marks ?? 1,
-      negativeMarks: q.negativeMarks ?? 0,
+      marks: configuration.marksPerQuestion,
+      negativeMarks: configuration.negativeMarks,
 
       source: "AI",
       status: "DRAFT"
     }));
 
-    // 12. Save questions in MongoDB
+    // 9. Save questions in MongoDB
     const savedQuestions = await Question.insertMany(
       questionDocuments
     );
 
-    // 13. Success response
+    // 10. Success response
     return res.status(201).json({
       success: true,
-      message: "AI questions generated successfully",
+      message: "AI questions generated using test configuration",
       totalQuestions: savedQuestions.length,
+      testConfiguration: {
+        title: configuration.title,
+        category: configuration.category,
+        difficulty: configuration.difficulty,
+        durationMinutes: configuration.durationMinutes,
+        totalQuestions: configuration.totalQuestions,
+        totalMarks: configuration.totalMarks,
+        passingMarks: configuration.passingMarks
+      },
       driveId,
       roundId,
       questions: savedQuestions
