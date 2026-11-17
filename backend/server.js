@@ -47,6 +47,12 @@ app.use("/api/rounds", roundRoutes);
 app.use("/api/ai-questions", aiQuestionRoutes);
 app.use("/api/questions", require("./routes/questionRoutes"));
 
+app.use(
+  "/api/test-configurations",
+  require("./routes/testConfigurationRoutes")
+);
+
+
 app.get("/", (req, res) => {
     res.json({
         message: "AI Smart Hiring Backend is running"
