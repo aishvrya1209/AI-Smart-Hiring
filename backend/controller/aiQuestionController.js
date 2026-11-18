@@ -171,7 +171,6 @@ const generateAIQuestions = async (req, res) => {
         durationMinutes: configuration.durationMinutes,
         totalQuestions: configuration.totalQuestions,
         totalMarks: configuration.totalMarks,
-        passingMarks: configuration.passingMarks
       },
       driveId,
       roundId,

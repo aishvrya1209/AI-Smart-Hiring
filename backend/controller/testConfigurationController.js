@@ -1,22 +1,19 @@
-
 const mongoose = require("mongoose");
 const TestConfiguration = require("../models/testConfiguration");
 const PlacementDrive = require("../models/placementDrive");
 const Round = require("../models/round");
 
+
+// ================= VALIDATE CONFIGURATION =================
 const validateConfiguration = (data) => {
   const {
     totalQuestions,
     totalMarks,
-    passingMarks,
     marksPerQuestion,
     topics
   } = data;
 
-  if (
-    !Array.isArray(topics) ||
-    topics.length === 0
-  ) {
+  if (!Array.isArray(topics) || topics.length === 0) {
     return "Please provide at least one topic";
   }
 
@@ -29,10 +26,6 @@ const validateConfiguration = (data) => {
     return "Total topic questions must equal totalQuestions";
   }
 
-  if (Number(passingMarks) > Number(totalMarks)) {
-    return "Passing marks cannot exceed total marks";
-  }
-
   if (
     Number(totalMarks) !==
     Number(totalQuestions) * Number(marksPerQuestion)
@@ -43,7 +36,8 @@ const validateConfiguration = (data) => {
   return null;
 };
 
-// Verify company ownership and round relationship
+
+// ================= VERIFY DRIVE AND ROUND =================
 const verifyDriveAndRound = async (
   driveId,
   roundId,
@@ -53,7 +47,9 @@ const verifyDriveAndRound = async (
     !mongoose.Types.ObjectId.isValid(driveId) ||
     !mongoose.Types.ObjectId.isValid(roundId)
   ) {
-    return { error: "Invalid driveId or roundId" };
+    return {
+      error: "Invalid driveId or roundId"
+    };
   }
 
   const drive = await PlacementDrive.findOne({
@@ -62,7 +58,9 @@ const verifyDriveAndRound = async (
   });
 
   if (!drive) {
-    return { error: "Placement drive not found or unauthorized" };
+    return {
+      error: "Placement drive not found or unauthorized"
+    };
   }
 
   const round = await Round.findOne({
@@ -71,13 +69,19 @@ const verifyDriveAndRound = async (
   });
 
   if (!round) {
-    return { error: "Round not found for this placement drive" };
+    return {
+      error: "Round not found for this placement drive"
+    };
   }
 
-  return { drive, round };
+  return {
+    drive,
+    round
+  };
 };
 
-// CREATE CONFIGURATION
+
+// ================= CREATE CONFIGURATION =================
 const createConfiguration = async (req, res) => {
   try {
     const companyId = req.user.id;
@@ -112,7 +116,9 @@ const createConfiguration = async (req, res) => {
     }
 
     const existingConfiguration =
-      await TestConfiguration.findOne({ roundId });
+      await TestConfiguration.findOne({
+        roundId
+      });
 
     if (existingConfiguration) {
       return res.status(409).json({
@@ -133,6 +139,7 @@ const createConfiguration = async (req, res) => {
       message: "Test configuration created successfully",
       configuration
     });
+
   } catch (error) {
     console.error("Create configuration error:", error);
 
@@ -150,7 +157,8 @@ const createConfiguration = async (req, res) => {
   }
 };
 
-// GET CONFIGURATION BY ROUND
+
+// ================= GET CONFIGURATION BY ROUND =================
 const getConfigurationByRound = async (req, res) => {
   try {
     const { roundId } = req.params;
@@ -179,6 +187,7 @@ const getConfigurationByRound = async (req, res) => {
       success: true,
       configuration
     });
+
   } catch (error) {
     console.error("Get configuration error:", error);
 
@@ -189,7 +198,8 @@ const getConfigurationByRound = async (req, res) => {
   }
 };
 
-// UPDATE CONFIGURATION
+
+// ================= UPDATE CONFIGURATION =================
 const updateConfiguration = async (req, res) => {
   try {
     const { id } = req.params;
@@ -227,7 +237,6 @@ const updateConfiguration = async (req, res) => {
       "durationMinutes",
       "totalQuestions",
       "totalMarks",
-      "passingMarks",
       "difficulty",
       "topics",
       "marksPerQuestion",
@@ -270,6 +279,7 @@ const updateConfiguration = async (req, res) => {
       message: "Test configuration updated successfully",
       configuration
     });
+
   } catch (error) {
     console.error("Update configuration error:", error);
 
@@ -280,7 +290,8 @@ const updateConfiguration = async (req, res) => {
   }
 };
 
-// DELETE CONFIGURATION
+
+// ================= DELETE CONFIGURATION =================
 const deleteConfiguration = async (req, res) => {
   try {
     const { id } = req.params;
@@ -318,6 +329,7 @@ const deleteConfiguration = async (req, res) => {
       success: true,
       message: "Test configuration deleted successfully"
     });
+
   } catch (error) {
     console.error("Delete configuration error:", error);
 
@@ -327,6 +339,7 @@ const deleteConfiguration = async (req, res) => {
     });
   }
 };
+
 
 module.exports = {
   createConfiguration,

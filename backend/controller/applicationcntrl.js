@@ -1,5 +1,5 @@
 const Application = require("../models/Application");
-const Candidate = require("../models/CandidateProfile");
+const Candidate = require("../models/candidateprofile");
 const Job = require("../models/placementDrive");
 
 // ==========================================
@@ -7,7 +7,7 @@ const Job = require("../models/placementDrive");
 // ==========================================
 const applyForJob = async (req, res) => {
   try {
-    const userId = req.user.userId;
+    const userId = req.user.id;
     const { driveId } = req.params;
 
     // Find candidate profile
@@ -67,7 +67,7 @@ const applyForJob = async (req, res) => {
 // ==========================================
 const getMyApplications = async (req, res) => {
   try {
-    const userId = req.user.userId;
+    const userId = req.user.id;
 
     // Find candidate
     const candidate = await Candidate.findOne({ userId });

@@ -57,12 +57,6 @@ const testConfigurationSchema = new mongoose.Schema(
       min: 1
     },
 
-    passingMarks: {
-      type: Number,
-      required: true,
-      min: 0
-    },
-
     difficulty: {
       type: String,
       enum: ["EASY", "MEDIUM", "HARD"],
