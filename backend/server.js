@@ -12,6 +12,7 @@ const placementDriveRoutes = require("./routes/placementDriveRoutes.js")
 const applicationRoutes = require("./routes/applicationRoutes");
 const roundRoutes = require("./routes/roundRoutes");
 const aiQuestionRoutes = require("./routes/aiQuestionRoutes");
+const testAttemptRoutes = require("./routes/testAttemptRoutes.js");
 
 
 
@@ -46,6 +47,9 @@ app.use("/api/rounds", roundRoutes);
 
 app.use("/api/ai-questions", aiQuestionRoutes);
 app.use("/api/questions", require("./routes/questionRoutes"));
+
+
+app.use("/api/test-attempt" , testAttemptRoutes);
 
 app.use(
   "/api/test-configurations",
