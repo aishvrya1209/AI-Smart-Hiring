@@ -11,6 +11,9 @@ const {
     updateRound,
     deleteRound
 } = require("../controller/roundController");
+const {
+    evaluateRound
+} = require("../controller/roundResultController");
 
 
 // Create a round for a drive
@@ -52,6 +55,12 @@ router.delete(
     companyAuthorization,
     deleteRound
 );
-
+// Evaluate round and shortlist candidates
+router.post(
+    "/round/evaluate",
+    auth,
+    companyAuthorization,
+    evaluateRound
+);
 
 module.exports = router;

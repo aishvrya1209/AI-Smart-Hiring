@@ -55,6 +55,7 @@ app.use(
   "/api/test-configurations",
   require("./routes/testConfigurationRoutes")
 );
+app.use("/api", require("./routes/roundRoutes"));
 
 
 app.get("/", (req, res) => {
